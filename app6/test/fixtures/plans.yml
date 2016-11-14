@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plan_no: 1
+  plan_name: MyText
+  company_name: MyText
+  duration: 1
+  bonus: 1
+  roi: 1
+
+two:
+  plan_no: 1
+  plan_name: MyText
+  company_name: MyText
+  duration: 1
+  bonus: 1
+  roi: 1

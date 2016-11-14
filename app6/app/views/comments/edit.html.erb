@@ -1,0 +1,38 @@
+<h2 align="center" class="glyphicon glyphicon-comment center-block">Comments</h2>
+<% if @comment.errors.any? %>
+	<ul>
+		<% @comment.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+	</ul>
+<% end %>
+<table class="table">
+	<caption><b><%= @plan.company_name %><b></caption>
+	<tbody>
+		<tr>
+			<th><i><u>Policy Holders</u></i></th>
+			<th><span class="glyphicon glyphicon-comment"> </span><i><u>Reviews</u></i></th>
+		</tr>
+		<% if Comment.exists?(@coms) %>
+			<% @coms.each do |c| %>
+				<tr>
+					<% if Customer.exists?(Customer.find_by_client_id(c.client_id)) %>
+						<td><%= Customer.find_by_client_id(c.client_id).cname %> </td>
+						<td><%= c.desc %></td>
+					<% end %>
+				</tr>
+			<% end %>
+		<% end %>
+		<%= form_for @comment do |f| %>
+			<tr>
+				<th><%= f.text_field :plan_no,value:@plan.plan_no %></th>
+				<td><%= f.text_field :client_id,placeholder:"Client ID" %></td>
+				<td><%= f.text_area :desc ,placeholder:"Comment",rows:6,cols:40 %></td>
+			</tr>
+			<tr>
+				<td><%= f.submit "Post Comment" ,class:"btn btn-primary btn-md" %></td>
+				<td><%= link_to "Back",customer_path(session[:id]),class:"btn btn-primary btn-md " %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

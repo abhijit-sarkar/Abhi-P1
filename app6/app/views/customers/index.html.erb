@@ -1,0 +1,26 @@
+<h2>List of Customers</h2>
+
+<table class = "table">
+    <thead>
+		<tr>
+			<th>Customers</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+    <tbody>
+		<% @customers.each do |f| %>
+			<tr>
+				<th><%= f.client_id %></th>
+				<td><%= f.cname %></td>
+				<td><%= link_to "Login",customer_path(f),class:"btn btn-success btn-xs" %></td>
+				<td><%= link_to "Delete",customer_path(f),method: :delete,data: {confirm: "Are you sure?" },class:"btn btn-danger btn-xs" %></td>
+			</tr>     
+		<% end %> 
+	 
+   </tbody>
+</table>
+<%= link_to "Add User",new_customer_path,class:"btn btn-primary btn-md" %>
+<%= link_to "Back",mains_path,class:"btn btn-primary btn-md" %>
+			
+<p><h5>*****To <i><b>buy any plan/edit customer details</b></i> you have to <b>Login</b>*****<h5></p>
