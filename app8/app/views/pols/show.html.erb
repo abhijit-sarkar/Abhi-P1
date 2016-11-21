@@ -1,0 +1,29 @@
+
+<table class = "table">
+		<tbody>
+			<tr>
+				<th>Plan Name :</td>
+				<td><%= @plan.plan_name %></td>
+			</tr>
+		  
+			<tr>
+				<th>Max Tenure :</th>
+				<td><%= @plan.max_tenure %></td>
+			</tr>
+			<tr>
+				<th>Rate of Interest :</th>
+				<td><%= @plan.roi %></td>
+			</tr>
+			<tr>
+				<th>Bonus :</th>
+				<td><%= @plan.bonus %></td>
+			</tr>
+			<tr>
+				
+				<td><%= link_to "Back",cal_path(session[:id]), class:"btn btn-primary btn-md" %></td>
+			</tr>
+	   </tbody>
+
+	</table>
+
+<br><br><br>
