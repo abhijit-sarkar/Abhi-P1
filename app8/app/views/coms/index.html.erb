@@ -1,0 +1,43 @@
+<html>
+<head>
+<style>
+table,.div1
+{
+margin-top:20px;
+margin-left:20px;
+}
+
+</style>
+</head>
+<body>
+<h3><u>List of Companies</u></h3>
+
+<table class = "table">
+    <thead>
+		<tr>
+			<th><h5><b>Company Name</b></h5></th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+   
+	<tbody>
+		<% @coms.each do |f| %>
+			<tr>
+				<td><%= f.com_name %></td>
+				<td><%= link_to "Edit",edit_com_path(f),class:"btn btn-info btn-xs" %></td>
+				<td><%= link_to "Details",com_path(f),class:"btn btn-success btn-xs" %></td>
+				<td><%= link_to "Delete",com_path(f),method: :delete,data: {confirm: "Are you sure?" },class:"btn btn-danger btn-xs" %></td>
+				<td><%= link_to "Plans available",cal_path(f),class:"btn btn-success btn-xs" %></td>
+				<td><h6>To <i>Add/View</i> Poicies under this company click on <b>Policies available</b></h6></td>
+			</tr>  
+		<% end %>    
+		
+	</tbody>
+</table>
+<div class="div1">
+	<%= link_to "Add Company",new_com_path,class:"btn btn-primary btn-md" %>
+	<%= link_to "Back",mains_path,class:"btn btn-primary btn-md" %>
+</div>
+</body>
+</html>	

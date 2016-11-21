@@ -1,0 +1,37 @@
+<h2>Create New Plan</h2>
+<%= form_for @plan do |f| %>
+	<% if @plan.errors.any? %>
+		<h4>Errors: </h4>
+		<ul>
+			<% @plan.errors.full_messages.each do|msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	<% end %>
+	<table class = "table">
+		<tbody>
+			<tr>
+				<th>Plan Name :</td>
+				<td><%= f.text_field :plan_name %></td>
+			</tr>
+		  
+			<tr>
+				<th>Max Tenure :</th>
+				<td><%= f.text_field :max_tenure %></td>
+			</tr>
+			<tr>
+				<th>Rate of Interest :</th>
+				<td><%= f.text_field :roi %></td>
+			</tr>
+			<tr>
+				<th>Bonus :</th>
+				<td><%= f.text_field :bonus %></td>
+			</tr>
+			<tr>
+				<td><%= f.submit class:"btn btn-primary btn-md" %></td>
+				<td><%= link_to "Back",cal_path(session[:id]), class:"btn btn-primary btn-md" %></td>
+			</tr>
+	   </tbody>
+
+	</table>
+<% end %>

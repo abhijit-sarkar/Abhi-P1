@@ -1,0 +1,26 @@
+<h2>Plans</h2>
+
+<table class = "table">
+    <thead>
+		<tr>
+			<th>Plans</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+   
+	<tbody>
+		<% @plans.each do |f| %>
+			<tr>
+				<td><%= f.plan_name %></td>
+				<td><%= link_to "Plan Details",vium_path(f),class:"btn btn-success btn-xs" %></td>
+				<td><%= link_to "Buy Plan",edit_pol_path(f),class:"btn btn-primary btn-xs" %> </td>						
+				
+			</tr>  
+		<% end %>    
+		
+	</tbody>
+</table>
+	
+	<%= link_to "Back",choices_path,class:"btn btn-primary btn-md" %>
+	
