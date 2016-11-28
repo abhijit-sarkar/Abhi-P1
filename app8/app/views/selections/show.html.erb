@@ -1,0 +1,33 @@
+<html>
+  <body>
+    <table class = "table">
+      <thead>
+	<th>Company Name</th>
+	<th>Plan Name</th>
+	<th>Max tenure</th>
+	<th>Rate of Interest</th>
+	<th>Bonus</th>
+      </thead>
+      <% @plans.each do |f| %>
+      <tbody>
+	<tr>
+	  <td><%= Com.find(f.com_id).com_name %></td>
+	  
+	  <td><%= f.plan_name %></td>
+	  
+	  <td><%= f.max_tenure %> days</td>
+	  
+	  <td><%= f.roi %>%</td>
+	  
+	  <td><%= f.bonus %>%</td>
+	  <td><%= link_to "Buy this plan",custom_path(f),class: "btn btn-primary btn-xs" %></td>
+	  <td><%= link_to "Reviews",comment_path(f),class: "btn btn-primary btn-xs" %></td>
+	</tr>
+	
+      </tbody>
+      <% end %>
+    </table>
+    <%= link_to "Back",selections_path,class: "btn btn-primary btn-md" %>
+    <br><br><br>
+  </body>
+</html>

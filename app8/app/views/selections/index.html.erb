@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <style>
+      .but
+      {
+      border-radius:40px;
+      }
+      .ext{
+      border:2px dotted;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Plans Available:</h3>
+    <div class="jumbotron ext">
+      <% @plans.each do |p| %>
+      
+      <%= link_to p.plan_name,selection_path(Plan.where(plan_name: p.plan_name).first),class:"btn btn-primary btn-lg but" %>
+      <br><br>
+      <% end %>
+    </div>
+  </body>
+</html>
