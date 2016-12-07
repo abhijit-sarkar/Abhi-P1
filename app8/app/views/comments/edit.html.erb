@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+      $('#p1').hide();
+      $('#p2').hide();
+      });
+    </script>
+  </head>
+  <body>
+    <h2 align="center" class="glyphicon glyphicon-comment center-block">Comments</h2>
+
+    <table class="table">
+      <caption></caption>
+      <tbody>
+	<% if Comment.exists?(@comments) %>
+	<tr>
+	  <th><i><u>Policy Holders</u></i></th>
+	  <th><span class="glyphicon glyphicon-comment"> </span><i><u>Reviews</u></i></th>
+	</tr>
+	<% end %>
+	<% @comments.each do |f| %>
+	<tr>
+	  <td><%= Customer.find(f.customer_id).customer_name %></td>
+	  <td><%= f.description %></td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
+    
+    <%= form_for @comment do |f| %>
+    <table class="table">
+      <tbody>
+	<tr>
+	  <th id="p1"><%= f.text_field :plan_id %></th>
+	  <th><%= Plan.find(params[:id]).plan_name %></th>
+	  <th><%= Customer.find(session[:id]).customer_name %></th>
+	  <td id="p2"><%= f.text_field :customer_id, placeholder:"Client ID" %></td>
+	  <td><%= f.text_area :description ,placeholder:"Comment",rows:6,cols:40 %></td>
+	</tr>
+	<tr>
+	  <td><%= f.submit "Post Comment" ,class:"btn btn-primary btn-md" %></td>
+	  <td><%= link_to "Back",customer_path(session[:id]),class:"btn btn-primary btn-md " %></td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
+  </body>
+</html>

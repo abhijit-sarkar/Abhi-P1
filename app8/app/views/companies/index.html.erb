@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <style>
+      table,.div1
+      {
+      margin-top:20px;
+      margin-left:20px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h3><u>List of Companies</u></h3>
+    <h5>- <i>Plans can only be created under a Company</i></h5>
+    <div class="table-responsive table-bordered">
+      <table class = "table">
+	<thead class="thead-default">
+	  <tr>
+	    <th>Company Name</th>
+	    <th></th>
+	    <th></th>
+	  </tr>
+	</thead>
+	
+	<tbody>
+	  <% @coms.each do |f| %>
+	  <tr>
+	    <td><%= f.company_name %></td>
+	    <td><%= link_to "Edit",edit_company_path(f),class:"btn btn-info btn-xs" %></td>
+	    <td><%= link_to "Details",company_path(f),class:"btn btn-success btn-xs" %></td>
+	    <td><%= link_to "Delete",company_path(f),method: :delete,data: {confirm: "Are you sure?" },class:"btn btn-danger btn-xs" %></td>
+	    <td><%= link_to "Plans",list_plan_path(f),class:"btn btn-success btn-xs" %></td>
+	    <td><h6>To <i>Add/View</i> Poicies under this company click on <b>Plans</b></h6></td>
+	  </tr>  
+	  <% end %>    
+	  
+	</tbody>
+      </table>
+    </div>
+    <div class="div1">
+      <%= link_to "Add Company",new_company_path,class:"btn btn-primary btn-md" %>
+      
+    </div>
+  </body>
+</html>	

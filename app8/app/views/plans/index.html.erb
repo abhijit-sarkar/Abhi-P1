@@ -1,0 +1,35 @@
+<html>
+  <body>
+    <div class="table-responsive table-bordered">
+      <table class = "table">
+	<thead>
+	  <th>Plan Name</th>
+	  <th>Company Name</th>
+	  <th>Max tenure</th>
+	  <th>Rate of Interest</th>
+	  <th>Bonus</th>
+	  <th>Max. Policy Amt.</th>
+	  <th>Min. Policy Amt.</th>
+	</thead>
+	<% @plans.each do |f| %>
+	<tbody>
+	  <tr>
+	    <td><%= f.plan_name %></td>
+	    <td><%= Company.find(f.company_id).company_name %></td>   	        
+	    <td><%= f.max_tenure %> days</td>	    
+	    <td><%= f.interest %>% p.a</td>
+	    <td><%= f.bonus %>%</td>
+	    <td>Rs.<%= f.max_amount %></td>
+	    <td>Rs.<%= f.min_amount %></td>
+	    <td><%= link_to "Buy this plan",policy_path(f),class: "btn btn-primary btn-xs" %></td>
+	    <td><%= link_to "Reviews",comment_path(f),class: "btn btn-primary btn-xs" %></td>
+	  </tr>
+	  
+	</tbody>
+	<% end %>
+      </table>
+    </div>
+    
+    <br><br><br>
+  </body>
+</html>
