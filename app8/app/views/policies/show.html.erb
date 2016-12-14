@@ -1,0 +1,79 @@
+
+<script type="text/javascript">
+  $(document).ready(function(){      
+  $('#t1').hide();
+  });
+</script>
+
+<h4>Fill the details: </h4>
+<h5> (** denotes Mandatory Fields)</h5>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form jumbotron">
+	<%= form_tag(:action => "check_data" ) do %>
+	<table class="table">
+	  <tbody>
+	    <tr id="t1" class= "form-group">
+	      <td><label>Plan ID:</label></td>
+	      <td><%= text_field_tag :plan_id,@plan.id,:readonly => true,class: "form-control" %></td>
+	    </tr>
+	    <tr class= "form-group">
+	      <td><label>Plan Name:</label></td>
+	      <td><%= @plan.plan_name  %> <%= link_to "Change Plan",plans_path,class: "btn btn-danger btn-xs" %></td>
+	    </tr>
+	    <tr class= "form-group">
+	      <td><label>Company Name:</label></td>
+	      <td><%= Company.find(@plan.company_id).company_name  %></td>
+	    </tr>
+	    <tr id="nm1" class= "form-group">
+	      <td><label>** Customer Name :</label> </td>
+	      <td><%= text_field_tag :customer_name,nil,required: true,class: "form-control"  %></td>
+	      
+	    </tr>
+	    <tr class= "form-group">
+	      <td><label>** Contact No :</label> </td>
+	      <td><%= number_field_tag :contact,nil,required: true,class: "form-control"  %><i>**No.should be of 10 digits**</i></td>
+	      
+	    </tr>
+	    <tr class= "form-group">
+	      <td><label>** Email ID :</label> </td>
+	      <td><%= email_field_tag :email,nil,required: true,class: "form-control"  %><i>E.g. anything@domain.com</i></td>
+	      
+	    </tr>
+	    <tr class= "form-group">
+	      <td><label>** Plan Duration(in years) : </label></td>
+	      <td><%= number_field_tag :duration,nil,min: 1,max: @plan.max_tenure,step: 1, required: true,class: "form-control"  %></td>
+	      
+	    </tr>
+	    <tr class= "form-group">
+	      <td><label>** Sum Insured(in Rs.) :</label> </td>
+	      <td><%= number_field_tag :premium,nil,min: @plan.min_amount,max: @plan.max_amount,required: true, class: "form-control"  %></td>
+	      
+	    </tr>
+	    <tr class="form-group">
+	      <td><label>** How would you like to pay your premium ?</label></td>
+	      <td>
+		<%= select_tag :premium_mode,"<option>Monthly</option><option>Yearly</option><option>Quarterly</option>".html_safe,class: "form-control" %>
+	      </td>
+	    </tr>
+	  </tbody>
+	</table>  
+	<%= submit_tag "Proceed", class: "btn btn-primary btn-md but1" %>
+	<%= link_to "Back",plans_path,class: "btn btn-primary btn-md" %>
+	<% end %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h5><b>Details of Plan : </b></h5>
+      <div class="div3">
+	<div class="div2">Max tenure: <%= @plan.max_tenure %>years</div>
+	<div class="div2">Rate of Interest: <%= @plan.interest %>% p.a</div>
+	<div class="div2">Bonus: <%= @plan.bonus %>%</div>
+	<div class="div2">Min.Policy Amt:&nbsp &nbspRs.<%= @plan.min_amount %></div>
+	<div class="div2">Max.Policy Amt:&nbsp &nbsp  Rs.<%= @plan.max_amount %></div>
+      </div>
+    </div>
+  </div>   
+</div>
+

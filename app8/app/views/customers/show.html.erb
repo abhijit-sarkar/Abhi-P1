@@ -1,0 +1,87 @@
+
+<div class="container">
+  <h5><b>Profile Details :-</b></h5>
+  <div class="table-bordered">
+    <table class = "table table-striped">
+      <tbody class="tab2">
+	<tr>
+	  <th><h5><b>Customer Name :</b></h5></th>
+	  <td><h5><%= @cust.customer_name %></h5></td>
+	</tr>
+	<tr>
+	  <th><h5><b>Contact :</b></h5></th>
+	  <td><h5><%=  @cust.contact %></h5></td>
+	</tr>
+	<tr>
+	  <th><h5><b>Email :</b></h5></th>
+	  <td><h5><%= @cust.email %></h5></td>
+	</tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d2">
+    <h5><b>Policies purchased :-</b></h5>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered tab1">
+      <thead>
+	<th><h5><b>Policy Name</b></h5></th>
+	<th><h5><b>Insurance Company</b></h5></th>
+	<th><h5><b>Nominee</b></h5></th>
+	<th><h5><b>Sum Insured</b></h5></th>
+	<th><h5><b>Premium Amount</b></h5></th>
+	<th><h5><b>Prem. Payment Type</b></h5></th>
+	<th><h5><b>Next Premium Date</b></h5></th>
+	<th><h5><b>Maturity Date</b></h5></th>
+	<th><h5><b>Time left</b></h5></th>
+	<th><h5><b>Mature Status</b></h5></th>
+	<th><h5><b>Matured Amount</b></h5></th>
+	<th><h5><b>Status</b></h5></th>
+	<th colspan="3"><h5><b>Options</b></h5></th>
+      </thead>
+      <tbody>
+	<% @pols.each do |p| %>
+	<tr>
+	  <td><%= Plan.find(p.plan_id).plan_name %></td>
+	  <td><%= Company.find(Plan.find(p.plan_id).company_id).company_name %>
+	  <td><%= p.nominee %></td>
+	  <td>Rs.<%= p.sum_insured %></td>
+	  <td>Rs.<%= p.premium %></td>
+	  <td><%= p.premium_mode %></td>
+	  <% if p.premium_mode == "Quarterly" %>
+	  <td><%= Time.now.to_date + 4.month %></td>
+	  <% end %>
+	  <% if p.premium_mode == "Monthly" %>
+	  <td><%= Time.now.to_date + 1.month %></td>
+	  <% end %>
+	  <% if p.premium_mode == "Yearly" %>
+	  <td><%= Time.now.to_date + 12.month %></td>
+	  <% end %>
+	  <td><%= p.maturity_date %></td>
+	  <td><%= p.maturity_date.year-Time.now.to_date.year %> year(s)</td>
+	  <% if (p.maturity_date.to_date == Time.now.to_date) %>
+	  <td><%= "Matured" %>
+	    <% else %>
+	  <td><%= "Not Matured" %></td>
+	  <% end %>
+	  <td>Rs.<%= p.maturity_amount %></td>
+	  <td><%= p.status %></td>
+	  <td><%= link_to "Delete",policy_path(p),method: :delete,data: {confirm: "Are you sure?" },class:"btn btn-danger btn-xs" %></td>
+	  <% if p.status!="Surrendered" %>
+	  <td><%= link_to "Surrender",surrender_customer_path(p),data: {confirm: "Are you sure?" },class:"btn btn-info btn-xs" %></td>
+	  <% end %>
+	  <td><%= link_to "Comment",edit_comment_path(p.plan_id),class: "btn btn-warning btn-xs" %></td>
+	  
+	</tr>
+	<% end %>
+      </tbody>
+      
+    </table>
+  </div>
+  <div class="d1">
+    
+    <%= link_to "Back",customers_path, class:"btn btn-primary btn-md" %>
+    <%= link_to "Home",home_index_path,class:"btn btn-primary btn-md" %>
+  </div>
+</div>
+
