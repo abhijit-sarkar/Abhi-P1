@@ -1,0 +1,54 @@
+<div class="table">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <th><b>Customer Name</b></th>
+      <th><b>Policy Name</b></th>
+      <th><b>Insurance Company</b></th>
+      <th><b>Nominee</b></th>
+      <th><b>Sum Insured</b></th>
+      <th><b>Premium Amount</b></th>
+      <th><b>Prem. Payment Type</b></th>
+      <th><b>Next Premium Date</b></th>
+      <th><b>Maturity Date</b></th>
+      <th><b>Time left</b></th>
+      <th><b>Mature Status</b></th>
+      <th><b>Matured Amount</b></th>
+      <th><b>Surrender Status</b></th>
+      <th colspan="4"><h5><b>Options</b></h5></th>
+    </thead>
+    <tbody>
+      <% @pols.each do |p| %>
+      <tr>
+	<td><%= Customer.find(p.customer_id).customer_name %></td>
+	<td><%= Plan.find(p.plan_id).plan_name %></td>
+	<td><%= Company.find(Plan.find(p.plan_id).company_id).company_name %>
+	<td><%= p.nominee %></td>
+	<td>Rs.<%= p.sum_insured %></td>
+	<td>Rs.<%= p.premium %></td>
+	<td><%= p.premium_mode %></td>
+	<% if p.premium_mode == "Quarterly" %>
+	<td><%= Time.now.to_date + 4.month %></td>
+	<% end %>
+	<% if p.premium_mode == "Monthly" %>
+	<td><%= Time.now.to_date + 1.month %></td>
+	<% end %>
+	<% if p.premium_mode == "Yearly" %>
+	<td><%= Time.now.to_date + 12.month %></td>
+	<% end %>
+	<td><%= p.maturity_date %></td>
+	<td><%= p.maturity_date.year-Time.now.to_date.year %> year(s)</td>
+	<% if (p.maturity_date.to_date == Time.now.to_date) %>
+	<td><%= "Matured" %>
+	  <% else %>
+	<td><%= "Not Matured" %></td>
+	<% end %>
+	<td>Rs.<%= p.maturity_amount %></td>
+	<td><%= p.status %></td>
+	<td><%= link_to "E-Mail Details",send_mail_policy_path(p),class:"btn btn-danger btn-xs" %></td>
+	<td><%= link_to "View Docs",list_policy_document_path(p),class:"btn btn-danger btn-xs" %></td>
+      </tr>
+      <% end %>
+    </tbody>    
+  </table>
+</div>
+<%= link_to "Back",home_index_path(1),class:"btn btn-primary btn-md" %>

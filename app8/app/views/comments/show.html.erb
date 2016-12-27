@@ -1,0 +1,18 @@
+
+<h2 align="center" class="glyphicon glyphicon-comment center-block">Comments</h2>
+<table class="table">
+  <tbody>
+    <tr>
+      <th><i><u>Policy Holders</u></i></th>
+      <th><span class="glyphicon glyphicon-comment"> </span><i><u>Reviews</u></i></th>
+    </tr>
+    <% @comments.each do |c| %>
+    <tr>
+      <td><%= Customer.find(c.customer_id).customer_name %> </td>
+      <td><%= c.description %></td>
+    </tr> 
+    <% end %>	
+  </tbody>
+</table>    
+<%= link_to " Back",plans_path,class:"btn btn-primary btn-md glyphicon glyphicon-home" %>    
+
