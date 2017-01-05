@@ -1,0 +1,43 @@
+<% if session[:controller] == "policy" %>
+<h3>Add documents (if any)</h3><div align="right"><progress value="75" max="100"></progress> Step 3(75%)</div>
+<% else %>
+<h3><u>Documents of <%= Customer.find(Policy.find(params[:id]).customer_id).customer_name%></u></h3>
+<% end %>
+<div class="jumbotron">
+  <div class="table-responsive">
+    <table class = "table">
+      <thead>
+	<tr>
+	  <th>Document Name</th>
+	  <th></th>
+	  <th></th>
+	</tr>
+      </thead>
+      
+      <tbody>
+	<% @docs.each do |f| %>
+	<tr>
+	  <td><%= f.title %></td>	
+	  <td><%= link_to "View",policy_document_path(f),class:"btn btn-success btn-xs" %></td>
+	  <td><%= link_to "Delete",policy_document_path(f),method: :delete,data: {confirm: "Are you sure?" },class:"btn btn-danger btn-xs" %></td>
+	  
+	</tr>  
+	<% end %>    
+	
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="div1">
+  <%= link_to "Add Document",new_policy_document_path,class:"btn btn-primary btn-md" %>
+  <% if session[:controller] == "policy" %>
+  <td><%= link_to "Next",transactions_path, class:"btn btn-primary btn-md" %></td>
+  <% else %>
+  <% if session[:controller] == "customer" %>
+  <%= link_to "Back",customer_path(session[:id]),class:"btn btn-primary btn-md" %>
+  <% else %>
+  <%= link_to "Back",policy_list_policy_path(session[:paramid]),class:"btn btn-primary btn-md" %>
+  <% end %>
+  <% end %>
+</div>
+
