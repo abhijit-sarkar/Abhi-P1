@@ -1,0 +1,47 @@
+
+<h2> Edit Customer Details </h2>
+<h5> (**)denotes Mandatory Fields </h5>
+
+<%= form_for @cust do |f| %>
+<% if @cust.errors.any? %>
+<h4>Errors: </h4>
+<ul>
+  <% @cust.errors.full_messages.each do|msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<div class = "jumbotron" >
+  
+  <table class = "table" >
+    
+    <tbody>
+      
+      <tr class = "form-group" >
+	<th><h5>**Customer Name :</h5></th>
+	<td><%= f.text_field :customer_name , class: "form-control" %></td>
+      </tr>
+      
+      <tr class = "form-group">
+	<th><h5>**Contact :</h5></th>
+	<td><%= f.number_field :contact , class: "form-control" %><i>**Contact should be 10 digits long**</i></td>
+      </tr>
+      
+      <tr class = "form-group">
+	<th><h5>**Email :</h5></th>
+	<td><%= f.text_field :email , class: "form-control" %></td>
+      </tr>
+      
+      <tr class = "form-group">
+	<td><%= f.submit class: "btn btn-primary btn-md" %></td>
+	<td><%= link_to "Back" , customers_path , class: "btn btn-primary btn-md" %></td>
+      </tr>
+      
+    </tbody>
+
+  </table>
+  
+</div>
+<% end %>
+

@@ -1,0 +1,41 @@
+
+<h2>Add New Document</h2>
+
+<%= form_for @doc, html: { multipart: true } do |f| %>
+<% if @doc.errors.any? %>
+<h4>Errors: </h4>
+<ul>
+  <% @doc.errors.full_messages.each do|msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<div class = "jumbotron" >
+  
+  <table class = "table" >
+    
+    <tbody>
+      
+      <tr class = "form-group" >
+	<th><h5>Document Name :</h5></th>
+	<td><%= f.text_field :title , class: "form-control" , required: 'required' %></td>
+      </tr>
+      
+      <tr class = "form-group" >
+	<th><h5>Policy Document :</h5></th>
+	<td><%= f.file_field :image , class: "form-control" %>(.pdf,.docx,.jpeg,.jpg,.png)</td>
+      </tr>
+      
+      <tr class = "form-group" >
+	<td><%= f.submit class: "btn btn-primary btn-md" %></td>
+	<td><%= link_to "Back" , list_policy_document_path(session[:pol_id]) , class: "btn btn-primary btn-md" %></td>		
+      </tr>
+      
+    </tbody>
+    
+  </table>
+  
+</div>
+<% end %>
+

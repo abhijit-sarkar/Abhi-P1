@@ -1,0 +1,63 @@
+
+<h2>Create New Plan</h2>
+<h5>(**)denotes Mandatory Fields</h5>
+
+<%= form_for @plan do |f| %>
+<% if @plan.errors.any? %>
+<h4>Errors: </h4>
+<ul>
+  <% @plan.errors.full_messages.each do|msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<div class = "jumbotron" >
+  
+  <table class = "table" >
+    
+    <tbody>
+      
+      <tr class = "form-group" >
+	<th><h5>**Plan Name :</h5></th>
+	<td><%= f.text_field :plan_name , class: "form-control" , required: 'required' %></td>
+      </tr>
+
+      <tr class = "form-group" >
+	<th><h5>**Max Tenure (in years) :</h5></th>
+	<td><%= f.number_field :max_tenure , class: "form-control" , required: 'required' %></td>
+      </tr>
+      
+      <tr class = "form-group" >
+	<th><h5>**Rate of Interest(% p.a):</h5></th>
+	<td><%= f.number_field :interest , min: 0 , max: 100 , class: "form-control" , required: 'required'  %></td>
+      </tr>
+      
+      <tr class = "form-group" >
+	<th><h5>**Bonus(%) :</h5></th>
+	<td><%= f.number_field :bonus , min: 0 , max: 100 , class: "form-control" , required: 'required'  %></td>
+      </tr>
+      
+      <tr class = "form-group" >
+	<th><h5>**Maximum Policy Amount(Rs.) :</h5></th>
+	<td><%= f.number_field :max_amount , min: 0 , class: "form-control" , required: 'required'  %></td>
+      </tr>
+      
+      <tr class = "form-group" >
+	<th><h5>**Minimum Policy Amount(Rs.) :</h5></th>
+	<td><%= f.number_field :min_amount , min: 0 , class: "form-control" , required: 'required'  %></td>
+      </tr>
+
+      <tr class = "form-group" >
+	<td><%= f.submit class: "btn btn-primary btn-md" %></td>
+	<td><%= link_to "Back" , list_plan_path(session[:company_id]) , class: "btn btn-primary btn-md" %></td>
+      </tr>
+      
+    </tbody>
+
+  </table>
+  
+</div>
+
+<% end %>
+
