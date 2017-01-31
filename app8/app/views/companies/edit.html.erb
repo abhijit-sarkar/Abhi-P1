@@ -1,0 +1,46 @@
+
+<h2> Edit Company Details </h2>
+<h5> (** denotes Mandatory Fields) </h5>
+
+<%= form_for @com do |f| %>
+<% if @com.errors.any? %>
+<h4> Errors: </h4>
+<ul>
+  <% @com.errors.full_messages.each do|msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<div class = "jumbotron">
+  
+  <table class = "table">
+    
+    <tbody>
+      
+      <tr class = "form-group">
+	<th><label>**Company Name :</label></th>
+	<td><%= f.text_field :company_name , class: "form-control" , required: 'required' %></td>
+      </tr>
+
+      <tr class = "form-group">
+	<th><label>**Contact :</label></th>
+	<td><%= f.number_field :contact , class: "form-control" , required: 'required' %><i>**Contact should be 10 digits long**</i></td>
+      </tr>
+      
+      <tr class = "form-group">
+	<th><label>**Address :</label></th>
+	<td><%= f.text_field :address , class: "form-control" , required: 'required' %></td>
+      </tr>
+
+      <tr class = "form-group">
+	<td><%= f.submit "Update Company" , class: "btn btn-primary btn-md" %></td>
+	<td><%= link_to "Back",companies_path , class: "btn btn-primary btn-md" %></td>
+      </tr>
+      
+    </tbody>
+
+  </table>
+</div>
+<% end %>
+

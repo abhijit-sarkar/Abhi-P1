@@ -1,0 +1,67 @@
+
+<h4>Fill personal details: </h4><div align = "right" > 25% <progress value = "25" max = "100"></progress> Step 1</div>
+<h5> (** denotes Mandatory Fields)</h5>
+
+<div class = "container" >
+  
+  <div class = "row" >
+    
+    <div class = "col-md-6" >
+      
+      <div class = "form jumbotron" >
+	
+	<%= form_tag(action: "check_data" ) do %>
+	<table class = "table">
+	  
+	  <tbody>
+	    
+	    <tr id = "nm1" class = "form-group">
+	      <td><label>** Customer Name :</label> </td>
+	      <td><%= text_field_tag :customer_name , nil , required: true , class: "form-control"  %></td>     
+	    </tr>
+	    
+	    <tr class = "form-group">
+	      <td><label>** Contact No :</label> </td>
+	      <td><%= number_field_tag :contact , nil , required: true , class: "form-control"  %><i>**No.should be of 10 digits**</i></td>
+	    </tr>
+	    
+	    <tr class = "form-group">
+	      <td><label>** Email ID :</label> </td>
+	      <td><%= email_field_tag :email , nil , required: true , class: "form-control"  %><i>E.g. anything@domain.com</i></td>     
+	    </tr>
+	    <tr>
+	      <td><%= link_to "Back" , plans_path , class: "btn btn-primary btn-md" %></td>
+	      <td><%= submit_tag "Proceed" , class: "btn btn-primary btn-md but1" %></td>
+	    </tr>
+	    
+	  </tbody>
+	  
+	</table>
+	
+	
+	<% end %>
+	
+      </div>
+      
+    </div>
+    
+    <div class = "col-md-4">
+      
+      <h5><b>Details of Plan : </b></h5>
+      
+      <div class = "div3">
+	
+	<div class = "div2">Max tenure: <%= @plan.max_tenure %>years</div>
+	<div class = "div2">Rate of Interest: <%= @plan.interest %>% p.a</div>
+	<div class = "div2">Bonus: <%= @plan.bonus %>%</div>
+	<div class = "div2">Min.Policy Amt:&nbsp &nbspRs.<%= @plan.min_amount %></div>
+	<div class = "div2">Max.Policy Amt:&nbsp &nbsp  Rs.<%= @plan.max_amount %></div>
+	
+      </div>
+      
+    </div>
+    
+  </div>
+  
+</div>
+
