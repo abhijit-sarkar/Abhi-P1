@@ -1,0 +1,44 @@
+
+<h3><b>Plans under <%= Company.find(params[:id]).company_name%>:</b></h3>
+<h5>- <i>Click on <b>Plan Name</b> to get plan details</i></h5>
+
+<div class = "jumbotron" >
+  
+  <div class = "table-responsive" >
+    
+    <table class = "table" >
+      
+      <thead>
+	
+	<tr>
+	  <th>Plan Name</th>
+	  <th></th>
+	  <th></th>
+	</tr>
+	
+      </thead>
+      
+      <tbody>
+	
+	<% @plans.each do |f| %>
+	<tr>
+	  <td><%= link_to f.plan_name , plan_path(f) %></td>
+	  <td><%= link_to "Edit Plan" , edit_plan_path(f) , class: "btn btn-info btn-xs" %></td>
+	  
+	  <td><%= link_to "" , plan_path(f) , method: :delete , data: {confirm: "Are you sure?" } , class: "btn btn-danger btn-xs glyphicon glyphicon-trash" %></td>
+	</tr>  
+	<% end %>    
+	
+      </tbody>
+      
+    </table>
+    
+  </div>
+  
+</div>
+
+<div class = "div1">
+  <%= link_to "Add Plan" , new_plan_path , class: "btn btn-primary btn-md" %>
+  <%= link_to "Back" , companies_path , class: "btn btn-primary btn-md" %>
+</div>
+

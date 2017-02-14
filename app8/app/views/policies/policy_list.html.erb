@@ -1,0 +1,162 @@
+
+<div class = "row">
+  <div class = "col-md-9">
+    <h4 class = "table1" ><b>Policies to mature within 10 yrs :</b></h4>
+    <h4 class = "table2" ><b>Policies to mature within 15 yrs :</b></h4>
+    <h4 class = "table3" ><b>All Policies :</b></h4>
+    <h4 class = "table5" ><b>Policies Surrendered:</b></h4>
+    <div class = "jumbotron" >
+      
+      <div class = "table-responsive" >
+	
+	<table class = "table table-striped table1" >
+	  
+	  <thead>
+	    
+	    <th><b>Customer Name</b></th>	
+	    <th><b>Plan Name</b></th>
+	    <th><b>Insurance Company</b></th>	
+	    <th><b>Maturity Date</b></th>      
+	    <th><b>Mature Status</b></th>
+	    <th class = "text-center" ><h5><b>Options</b></h5></th>
+	    
+	  </thead>
+	  
+	  <tbody>
+	    
+	    <% @pols.each do |f| %>
+	    <% if ( f.maturity_date.to_date.year - Time.now.to_date.year).to_i <= 10 %>
+	       
+	       <tr>
+		 <td><%= Customer.find(f.customer_id).customer_name %></td>
+		 <td><%= Plan.find(f.plan_id).plan_name  %></td>
+		 <td><%= Company.find(Plan.find(f.plan_id).company_id).company_name %></td>   	        			    
+		 <td><%= f.maturity_date %></td>		
+		 <td><%= f.status %></td>
+		 <td><%= link_to "View details" , policy_details_policy_path(f) , class: "btn btn-primary btn-xs" %></td>
+
+	       </tr>
+	       
+	       <% end %>
+	       <% end %>
+	       
+	  </tbody>
+	  
+	</table>
+	
+	<table class = "table table-striped table2" >
+	  
+	  <thead>
+	    
+	    <th><b>Customer Name</b></th>	
+	    <th><b>Plan Name</b></th>
+	    <th><b>Insurance Company</b></th>	
+	    <th><b>Maturity Date</b></th>      
+	    <th><b>Mature Status</b></th>
+	    <th class = "text-center" ><h5><b>Options</b></h5></th>
+	    
+	  </thead>
+	  
+	  <tbody>
+	    
+	    <% @pols.each do |f| %>
+	    <% if ( f.maturity_date.to_date.year - Time.now.to_date.year).to_i <= 15 %>
+	       
+	       <tr>
+		 <td><%= Customer.find(f.customer_id).customer_name %></td>
+		 <td><%= Plan.find(f.plan_id).plan_name  %></td>
+		 <td><%= Company.find(Plan.find(f.plan_id).company_id).company_name %></td>   	        			    
+		 <td><%= f.maturity_date %></td>		
+		 <td><%= f.status %></td>
+		 <td><%= link_to "View details" , policy_details_policy_path(f) , class: "btn btn-primary btn-xs" %></td>
+
+	       </tr>
+	       
+	       <% end %>
+	       <% end %>
+	       
+	  </tbody>
+	  
+	</table>
+
+	<table class = "table table-striped table3" >
+	  
+	  <thead>
+	    
+	    <th><b>Customer Name</b></th>	
+	    <th><b>Plan Name</b></th>
+	    <th><b>Insurance Company</b></th>	
+	    <th><b>Maturity Date</b></th>      
+	    <th><b>Mature Status</b></th>
+	    <th class = "text-center" ><h5><b>Options</b></h5></th>
+	    
+	  </thead>
+	  
+	  <tbody>
+	    
+	    <% @pols.each do |f| %>
+	    
+	    <tr>
+	      <td><%= Customer.find(f.customer_id).customer_name %></td>
+	      <td><%= Plan.find(f.plan_id).plan_name  %></td>
+	      <td><%= Company.find(Plan.find(f.plan_id).company_id).company_name %></td>   	        			    
+	      <td><%= f.maturity_date %></td>		
+	      <td><%= f.status %></td>
+	      <td><%= link_to "View details" , policy_details_policy_path(f) , class: "btn btn-primary btn-xs" %></td>
+
+	    </tr>
+	    
+	    <% end %>
+	    
+	  </tbody>
+	  
+	</table>
+	
+	<table class = "table table-striped table5" >
+	  
+	  <thead>
+	    
+	    <th><b>Customer Name</b></th>	
+	    <th><b>Plan Name</b></th>
+	    <th><b>Insurance Company</b></th>	
+	    <th><b>Maturity Date</b></th>      
+	    <th><b>Mature Status</b></th>
+	    <th class = "text-center" ><h5><b>Options</b></h5></th>
+	    
+	  </thead>
+	  
+	  <tbody>
+	    
+	    <% @pols.each do |f| %>
+	    <% if f.status == "Surrendered" %>
+	    <tr>
+	      <td><%= Customer.find(f.customer_id).customer_name %></td>
+	      <td><%= Plan.find(f.plan_id).plan_name  %></td>
+	      <td><%= Company.find(Plan.find(f.plan_id).company_id).company_name %></td>   	        			    
+	      <td><%= f.maturity_date %></td>		
+	      <td><%= f.status %></td>
+	      <td><%= link_to "View details" , policy_details_policy_path(f) , class: "btn btn-primary btn-xs" %></td>
+
+	    </tr>
+	    <% end %>
+	    <% end %>
+	    
+	  </tbody>
+	  
+	</table>
+      </div>
+      
+    </div>
+  </div>
+  <div class = "col-md-3">
+    <h4><u>Policies about to mature : </u></h4>
+    <label class = "checkbox-inline form-control"><input id = "inp1" name = "policy" type = "radio" value = "c1" /> Within 10 yrs.</label><br>
+    <label class = "checkbox-inline form-control"><input id = "inp2" name = "policy" type = "radio" value = "c2" /> Within 15 yrs.</label><br>
+    <br><br>
+    <label class = "checkbox-inline form-control"><input id = "inp3" name = "policy" type = "radio" value = "c3" checked = "checked" /> All Policies</label><br>
+    <label class = "checkbox-inline form-control"><input id = "inp4" name = "policy" type = "radio" value = "c5" /> Policies Surrendered</label>
+  </div>
+</div>
+
+<%= link_to "Home" , home_index_path(1) , class: "btn btn-primary btn-md" %>
+

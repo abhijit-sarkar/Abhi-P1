@@ -1,0 +1,40 @@
+
+<h2>List of Customers</h2>
+<h5><i>- Click on <b>Customer Name</b> to get customer details</i></h5>
+
+<div class = "jumbotron" >
+  
+  <div class = "table-responsive" >
+    
+    <table class = "table" >
+      
+      <thead>
+	
+	<tr>
+	  <th>Customer Name</th>
+	  <th></th>
+	  <th></th>
+	</tr>
+	
+      </thead>
+      
+      <tbody>
+	
+	<% @custs.each do |f| %>
+	<tr>
+	  <td><%= link_to f.customer_name , customer_path(f) %></td>
+	  <td><%= link_to "Edit Details" , edit_customer_path(f) , class:"btn btn-info btn-xs" %></td>
+	  <td><%= link_to "" , customer_path(f) , method: :delete , data: {confirm: "Are you sure?" } , class: "btn btn-danger btn-xs glyphicon glyphicon-trash" %></td>
+	</tr>  
+	<% end %>
+	
+      </tbody>
+      
+    </table>
+    
+  </div>
+  
+</div>
+
+<%= link_to "Add Customer" , new_customer_path , class: "btn btn-primary btn-md" %>
+<%= link_to "Home" , home_index_path , class: "btn btn-primary btn-md" %>
