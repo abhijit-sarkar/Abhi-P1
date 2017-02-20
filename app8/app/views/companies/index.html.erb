@@ -1,0 +1,43 @@
+
+<h3><b> List of Companies: </b></h3>
+<h5>- <i> Click on <b> Company Name </b> to get company details </i></h5>
+<div class = "jumbotron" >
+  <div class = "table-responsive" >
+    
+    <table class = "table" >
+      
+      <thead class = "thead-default" >
+	
+	<tr>
+	  <th>Company Name</th>
+	  <th></th>
+	  <th></th>
+	</tr>
+	
+      </thead>
+      
+      <tbody>
+	
+	<% @coms.each do |f| %>
+	<tr>
+	  <td><%= link_to f.company_name , company_path(f) , class: "text-uppercase" %></td>
+	  <td><%= link_to "Edit Details" , edit_company_path(f) , class: "btn btn-info btn-xs" %></td>
+	  <td><%= link_to "Add/View Plans" , list_plan_path(f) , class: "btn btn-primary btn-xs" %></td>
+	  <td><%= link_to "" , company_path(f) , method: :delete,data: {confirm: "Are you sure?" } , class: "btn btn-danger btn-xs glyphicon glyphicon-trash" %></td>
+	</tr>  
+	<% end %>    
+	
+      </tbody>
+      
+    </table>
+    
+  </div>
+</div>
+
+<div class = "div1" >
+  
+  <%= link_to "Add Company" , new_company_path , class: "btn btn-primary btn-md" %>
+  <%= link_to "Home" , home_index_path , class: "btn btn-primary btn-md" %>
+  
+</div>
+

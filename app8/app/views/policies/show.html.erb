@@ -1,0 +1,142 @@
+
+<h3>Policy Details </h3>
+<div class = "row">
+  <div class = "col-md-9">
+    <div class = "jumbotron" >      
+      <div class = "table-responsive" >
+	
+	<table class = "table" >
+	  
+	  <tbody>
+	    
+	    <tr>
+	      <th>Customer Name :</th>
+	      <td><%= Customer.find(@pol.customer_id).customer_name  %></td>
+	    </tr>
+
+	    <tr>
+	      <th>Contact :</th>
+	      <td><%= Customer.find(@pol.customer_id).contact %></td>
+	    </tr>
+
+	    <tr>
+	      <th>Email :</th>
+	      <td><%= Customer.find(@pol.customer_id).email %></td>
+	    </tr>
+	    
+	    <tr>
+	      <th>Plan Name :</th>
+	      <td> <button type = "button" class = "btn btn-success btn-xs butv"><%= Plan.find(@pol.plan_id).plan_name %></button> </td>
+	    </tr>
+	    
+	    <tr>
+	      <th>Company Name :</th>
+	      <td><%= Company.find(Plan.find(@pol.plan_id).company_id).company_name %></td>
+	    </tr>
+	    
+	    <tr>
+	      <th>Duration :</th>
+	      <td><%= @pol.duration %> years</td>
+	    </tr>
+	    
+	    <tr>
+	      <th>Sum Insured :</th>
+	      <td>Rs.<%= @pol.sum_insured %></td>
+	    </tr>
+	    
+	    <tr>
+	      <th>Premium Paid :</th>
+	      <td>Rs.<%= @pol.premium %></td>
+	    </tr>
+	    
+	    <tr>
+	      <th>Maturity Value :</th>
+	      <td>Rs.<%= @pol.maturity_amount %></td>
+	    </tr>
+	    
+	    <tr>
+	      <th>Premium Type :</th>
+	      <td><%= @pol.premium_mode %></td>
+	    </tr>
+	    
+	    <tr>
+	      <th>Next Premium Date :</th>
+	      <td>
+		<% if @pol.premium_mode == "Quarterly" %>
+		<%= Time.now.to_date + 4.month %>
+		<% end %>
+		<% if @pol.premium_mode == "Monthly" %>
+		<%= Time.now.to_date + 1.month %>
+		<% end %>
+		<% if @pol.premium_mode == "Yearly" %>
+		<%= Time.now.to_date + 12.month %>
+		<% end %>
+	      </td>
+	    </tr>
+	    <tr>
+	      
+	      <td class="back_ind">  <%= link_to "Back" , policies_path , class: "btn btn-primary btn-md" %></td>
+	      
+	      <td class="back_cust"> <%= link_to "Back" , customer_path(@pol.customer_id) , class: "btn btn-primary btn-md" %></td>
+	      
+	      <td class = "back_plan"> <%= link_to "Back" , plan_path(@pol.plan_id) , class: "btn btn-primary btn-md" %></td>
+	      
+	      <td><%= link_to "Send E-Mail" , send_mail_policy_path(@pol.id) , class: "btn btn-primary btn-md" %></td>
+	    </tr>
+	  </tbody>
+
+	</table>
+	
+      </div>      
+    </div>
+  </div>
+  
+  <div class = "col-md-3">
+    <div class = "row">
+      <div class = "col-md-12 divp">
+	<h4><b>Plan details: </b></h4>
+	<ol>
+	  <li>Max tenure: <%= @plan.max_tenure %>years</li>
+	  <li>Rate of Interest: <%= @plan.interest %>% p.a</li>
+	  <li>Bonus: <%= @plan.bonus %>%</li>
+	  <li>Min.Policy Amt:&nbsp &nbspRs.<%= @plan.min_amount %></li>
+	  <li>Max.Policy Amt:&nbsp &nbsp  Rs.<%= @plan.max_amount %></li>
+	</ol>
+      </div>
+    </div>
+    <div class = "row">
+      <div class = "col-md-12">
+	
+	<table class = "table table-striped">
+	  <caption><b><u>Policy Documents</u></b></caption>
+	  <thead>
+	    <th>Name</th>
+	    <th colspan = "2" >Options</th>
+	  </thead>
+	  <tbody>
+	    
+	    <% @docs.each do |f| %>
+	    <tr>
+	      <td><%= f.title %></td>
+	      <td><%= link_to "View" , policy_document_path(f) , class: "pol_doc" %></td>
+	      <td><%= link_to "" , destroy_doc_policy_path(f) , data: {confirm: "Are you sure?" } , class: "btn btn-xs btn-danger glyphicon glyphicon-trash" %></td>	  
+	    </tr>
+	    <% end %>
+	    
+	  </tbody>
+	  <tfoot>
+	    <tr>
+	      <td><%= link_to "+ Add" , doc_list_policy_document_path(@pol) , class: "btn btn-xs btn-primary add1" %></td>
+	      
+	    </tr>
+	  </tfoot>
+	</table>
+	
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
